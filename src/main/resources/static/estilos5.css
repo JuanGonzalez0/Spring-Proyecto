@@ -1,0 +1,101 @@
+/* Resetear márgenes y paddings por defecto */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fondo y fuente general de la página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+}
+
+/* Contenedor principal */
+.container {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo de los inputs */
+input[type="text"] {
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Estilo de los botones */
+input[type="button"] {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+/* Estilo específico para el botón de Connect */
+#gfg-blue {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+}
+
+#gfg-blue:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo específico para el botón de Send */
+#gfg-color {
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+
+#gfg-color:hover {
+    background-color: #218838;
+}
+
+/* Estilo del contenedor de mensajes */
+#messages {
+    border: 1px solid #ddd;
+    padding: 15px;
+    background-color: #f9f9f9;
+    margin-top: 20px;
+    min-height: 150px;
+    border-radius: 5px;
+}
+
+/* Estilo de las filas */
+.row {
+    margin-bottom: 20px;
+}
+
+/* Alineación de los botones y campos de texto */
+.col {
+    padding: 10px;
+}
+
+/* Personalización de los mensajes */
+.message {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    background-color: #e2e6ea;
+}
+
+/* Mensajes enviados por el usuario */
+.message.sent {
+    background-color: #007BFF;
+    color: white;
+    text-align: right;
+}

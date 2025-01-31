@@ -1,0 +1,101 @@
+/* Resetear márgenes y paddings por defecto */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fondo y fuente general de la página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Estilo para el contenedor de la vista de registro */
+.registrarse {
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Estilo para el título */
+.titulo-regis {
+    font-size: 2.5rem;
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+/* Estilo para las etiquetas de los inputs */
+label {
+    font-size: 1rem;
+    color: #333;
+    display: block;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+/* Estilo para los inputs */
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+/* Estilo para el botón de enviar */
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.1rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Efecto hover en el botón */
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para el enlace de vuelta al inicio */
+.navbar {
+    color: #007BFF;
+    text-decoration: none;
+    margin-top: 20px;
+    display: inline-block;
+    font-size: 1rem;
+}
+
+/* Efecto hover en el enlace */
+.navbar:hover {
+    color: #0056b3;
+}
+
+/* Mensaje de confirmación después de enviar el formulario */
+#logeoConfirm h2 {
+    color: green;
+    font-size: 1.5rem;
+    margin-top: 20px;
+}

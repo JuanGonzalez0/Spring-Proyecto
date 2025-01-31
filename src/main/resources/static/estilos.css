@@ -1,0 +1,70 @@
+/* Resetear márgenes y paddings por defecto */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fondo y fuente general de la página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9; /* Color de fondo suave */
+    color: #333; /* Color de texto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Estilo para la caja principal */
+.principal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+}
+
+/* Contenedor de la sección de índice */
+.index {
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px; /* Máximo ancho para evitar que se estire mucho */
+}
+
+/* Estilo del título */
+h1 {
+    font-size: 2.5rem;
+    color: #007BFF; /* Color atractivo para el título */
+    margin-bottom: 20px;
+}
+
+/* Estilo de los enlaces */
+a {
+    text-decoration: none;
+    color: #007BFF;
+    font-size: 1.1rem;
+    margin: 10px 0;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+/* Efecto cuando pasas el cursor por los enlaces */
+a:hover {
+    color: #0056b3;
+}
+
+/* Estilo de la lista */
+il {
+    list-style-type: none;
+}
+
+/* Margen entre los elementos */
+p {
+    margin: 10px 0;
+}

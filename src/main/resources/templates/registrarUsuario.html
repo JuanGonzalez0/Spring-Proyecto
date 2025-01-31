@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+	<link rel="stylesheet" href="estilos2.css">
+    <title>Jugala!</title>
+</head>
+
+<body>
+    <h1 class="titulo-regis">Registrarse</h1>
+	<div class="registrarse">
+		<form action="/registrarUsuario" method="POST" id="register" class="forms">
+			<label id="nombr">Su Nombre: <input type="text" id="nomb" name="nomb" required></label>
+			<p>
+			<label id="contras">Su contraseña: <input type="password" id="contra" name="contra" required></label>
+			<p>
+			<button type="submit" id="boton">Enviar</button>
+		</form>
+		<p>
+		<div id="logeoConfirm"></div>
+		<p>
+		<a class="navbar" th:href="@{/}">Volver al inicio</a>
+	</div>
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const register = document.getElementById("register");
+			
+			register.addEventListener("submit", (event)=>{
+				event.preventDefault()
+				const nombre = document.getElementById("nomb").value;
+				const contra = document.getElementById("contra").value;
+				const boton = document.getElementById("boton");
+				const logeoConfrim = document.getElementById("logeoConfirm");
+				
+				const usuario = {
+					"nombUser":nombre,
+					"contra":contra
+				}
+				
+				fetch("/registrarUsuario", {
+					method: 'POST',
+					headers: {
+					    'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(usuario)
+				})				
+				.then(() => {
+				    nombre.disabled = true;
+					contra.disabled = true;
+					boton.disabled = true;
+					
+					
+					logeoConfrim.innerHTML= `<h2>Registrado!</h2>`;
+				})
+			});
+		})
+	</script>
+</body>
+
+</html>

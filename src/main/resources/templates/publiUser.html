@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="estilos4.css">
+	<title>Jugala!</title>
+</head>
+	
+<body>
+	<h1>Tus Publicaciones</h1>
+	<p>
+	<table border="1">
+	    <thead>
+	        <tr>
+	            <th>IdMensaje: </th>
+	            <th>Texto: </th>
+	            <th>Autor: </th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr th:each="publi : ${publisUser}">
+	            <td th:text="${publi.idMensaje}"></td>
+	            <td th:text="${publi.textPubli}"></td>
+	            <td th:text="${publi.autor}"></td>
+				<td><button class="eliminar" th:data-id="${publi.idMensaje}">Eliminar</button></td>
+				<td>
+				    <button class="cambiar" th:data-id="${publi.idMensaje}">Cambiar Publicación: </button>
+				    <input type="text" th:id="'nuevaPubli_' + ${publi.idMensaje}" name="nuevaPubli" th:value="${publi.textPubli}">
+				</td>
+	        </tr>
+	    </tbody>
+	</table>
+	<p>
+	<a class="navbar" th:href="@{/}">Volver al inicio</a>
+	<p>
+	<il><a th:href="@{/main}">Publicaciones</a></il>
+	<script>
+	    // Espera a que el documento esté completamente cargado
+	    document.addEventListener("DOMContentLoaded", function () {
+	        // Seleccionamos todos los botones con la clase 'eliminar'
+	        const botonesEliminar = document.querySelectorAll('.eliminar');
+			const botonesCambiar = document.querySelectorAll('.cambiar');
+
+	        
+	        // Añadimos un evento de click a cada botón
+	        botonesEliminar.forEach(function(boton) {
+	            boton.addEventListener('click', function() {
+	                // Obtenemos el valor de 'data-id' del botón que fue clickeado
+	                const idMensaje = boton.getAttribute('data-id');
+	                console.log('ID del mensaje a eliminar: ' + idMensaje);
+
+					fetch(`/publiUser/${idMensaje}`, {
+					    method: 'DELETE'
+					})
+					.then(() => location.reload())
+	            });
+	        });
+			
+			botonesCambiar.forEach((boton)=>{
+				boton.addEventListener('click', ()=>{
+					const idMensaje = boton.getAttribute('data-id');
+					const publiNuevaInput = document.getElementById(`nuevaPubli_${idMensaje}`);
+					const publiNueva = publiNuevaInput.value;
+					
+					const publicacion ={
+						textPubli:publiNueva
+					}
+
+					fetch(`/cambiarPubli/${idMensaje}`, {
+						method: 'PUT',
+						headers: {
+						    'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(publicacion)
+					})
+					.then(()=> location.reload())
+				})
+			})
+			
+	    });
+	</script>
+</body>
+
+</html>

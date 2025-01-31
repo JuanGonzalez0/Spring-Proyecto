@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="estilos3.css">
+	<title>Jugala!</title>
+</head>
+	
+<body>
+	<div class="main">
+		<h1>Jugala!</h1>
+		<h3>Bienvenido! <span id="nombre" th:text="${username}"></span></h3> 
+		<table border="1">
+		    <thead>
+		        <tr>
+		            <th>IdMensaje: </th>
+		            <th>Texto: </th>
+		            <th>Autor: </th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr th:each="publi : ${publis}">
+		            <td th:text="${publi.idMensaje}"></td>
+		            <td th:text="${publi.textPubli}"></td>
+		            <td th:text="${publi.autor}"></td>
+		        </tr>
+		    </tbody>
+		</table>
+		<p>
+		<div>
+			<form action="/main" method="POST" id="publiForm">
+				<label>Publica algo! <p><input type="text" id="texto" name="texto"></label>
+				<button type="submit">Publicar</button>
+			</form>
+		</div>
+		<p>
+		<form th:action="@{/logout}" method="post">
+		    <input type="submit" value="Sign Out"/>
+		</form>
+		<p>
+		<a th:href="@{/publiUser}">Mis Publicaciones</a>
+		<p>
+		<a class="navbar" th:href="@{/}">Volver al inicio</a>	
+	</div>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const publiForm = document.getElementById("publiForm");
+
+			publiForm.addEventListener("submit", (event)=>{
+				event.preventDefault()
+				const texto = document.getElementById("texto").value;
+				
+				const publicacion = {
+					"textPubli":texto
+				}
+				
+				fetch("/main", {
+					method: 'POST',
+					headers: {
+					    'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(publicacion)
+				})				
+				.then(() => {
+					publiForm.reset();
+					location.reload();
+				})
+			});
+		})
+	</script>
+</body>
+
+</html>

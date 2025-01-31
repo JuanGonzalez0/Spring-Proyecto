@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jugala!</title>
+	<link rel="stylesheet" th:href="@{/estilos5.css?v=1.0}">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <input
+            type="text"
+            id="name"
+            class="form-control mb-2"
+            placeholder="Ingrese un Nombre"
+          />
+          <input
+            id="connectButton"
+            type="button"
+            value="Conectar"
+            class="btn gfg-blue mb-2"
+            onclick="connect()"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input
+            type="text"
+            id="message"
+            class="form-control mb-2"
+            placeholder="Ingresa tu Mensaje"
+          />
+          <input
+            type="button"
+            value="Enviar"
+            class="btn gfg-color mb-2"
+            onclick="sendToGroupChat()"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div id="messages" class="border p-3"></div>
+        </div>
+      </div>
+    </div>
+	<a class="navbar" th:href="@{/}">Volver al inicio</a>
+    <script th:inline="javascript">
+		let ws, currentUser;
+
+		// On pressing Connect this method will be called
+		function connect() {
+
+		  ws = new WebSocket("ws://localhost:8080/hello");
+
+		  //This function will called everytime new message arrives
+		  ws.onmessage = function (e) {
+		    console.log(e);
+		    printMessage(e.data);
+		  };
+		  document.getElementById("connectButton").disabled = true;
+		  document.getElementById("connectButton").value = "Conectado";
+		  document.getElementById("name").disabled = true;
+		  currentUser = document.getElementById("name").value;
+		  console.log(currentUser);
+		}
+
+		//This function takes care of printing the message on browser
+		function printMessage(data) {
+		  let messages = document.getElementById("messages");
+		  let messageData = JSON.parse(data);
+		  let newMessage = document.createElement("div");
+		  newMessage.className = "incoming-message";
+		  newMessage.innerHTML = messageData.name + " : " + messageData.message;
+		  messages.appendChild(newMessage);
+		}
+
+		//This function handles functionality of sending the message to websocket
+		function sendToGroupChat() {
+		  if (ws == undefined) return;
+		  let messageText = document.getElementById("message").value;
+		  document.getElementById("message").value = "";
+		  let name = document.getElementById("name").value;
+		  let messageObject = {
+		    name: name,
+		    message: messageText,
+		  };
+
+		  let newMessage = document.createElement("div");
+		  newMessage.innerHTML = currentUser + " : " + messageText;
+		  newMessage.className = "outgoing-message";
+		  messages.appendChild(newMessage);
+
+		  //In-Built functions Send is used with object we created
+		  ws.send(JSON.stringify(messageObject));
+		}
+	</script>
+  </body>
+</html>
